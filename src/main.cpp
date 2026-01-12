@@ -3,14 +3,21 @@
 #include "Semaphore.hpp"
 
 int ressourcePartagee;
+Semaphore sem(1);
 
 void lecteur(int numLecteur)
 {
   for (int i = 0; i < 4; i++)
   {
     std::cout << "Lecteur n° " << numLecteur << " en cours " << endl;
-    this_thread::sleep_for(chrono::milliseconds(rand() % 20000));
+    this_thread::sleep_for(chrono::milliseconds(rand() % 2000));
+
+    // protect shared resource
+    sem.P();
+    // use shared resource
     std::cout << "        Valeur lue = " << ressourcePartagee << "  " << endl;
+    // release shared resource
+    sem.V();
   }
 }
 
@@ -20,10 +27,18 @@ void ecrivain(int numEcrivain)
   for (int i = 0; i < 4; i++)
   {
     std::cout << "Ecrivain n° " << numEcrivain << " en cours " << endl;
+
+    // protect shared resource
+    sem.P();
+
+    // use shared resource
     x = ressourcePartagee;
-    this_thread::sleep_for(chrono::milliseconds(rand() % 20000));
-    std::cout << "valeur à incrémenter de la ressourcePartagee = " << x << "  " << endl;
+    this_thread::sleep_for(chrono::milliseconds(rand() % 2000));
+    std::cout << "Ecrivain n° " << numEcrivain << " : " << "valeur à incrémenter de la ressourcePartagee = " << x << "  " << endl;
     ressourcePartagee = x + 1;
+
+    // release shared resource
+    sem.V();
   }
 }
 
