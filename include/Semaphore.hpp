@@ -16,7 +16,7 @@ public:
     cout << "valeur initiale du sémaphore = " << val << endl;
   }
 
-  inline void V(int tid)
+  inline void V(int tid = 0)
   {
     std::unique_lock<std::mutex> lock(mtx);
     val++;
@@ -25,7 +25,7 @@ public:
     cv.notify_one();
   }
 
-  inline void P(int tid)
+  inline void P(int tid = 0)
   {
     std::unique_lock<std::mutex> lock(mtx);
     while (val == 0)
