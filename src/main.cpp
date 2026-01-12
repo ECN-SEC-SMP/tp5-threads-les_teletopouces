@@ -6,7 +6,7 @@
 
 std::mutex mtx;
 std::condition_variable cv;
-Controleur ctrl(0); // LE PROCESSUS CONTROLEUR
+TomyLeControleur ctrl(0); // LE PROCESSUS CONTROLEUR
 
 // TrainAB
 void circuleAB(int numTrain)

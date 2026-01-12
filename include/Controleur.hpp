@@ -8,18 +8,18 @@
 
 using namespace std;
 
-class Controleur
+class TomyLeControleur
 {
 public:
-  Controleur(int valeur_initiale) : train_counter(valeur_initiale)
+  TomyLeControleur(int valeur_initiale) : compteur_de_dinotrains(valeur_initiale)
   {
   }
 
   bool controlinEnB(int numero)
   {
-    if (train_counter >= 0)
+    if (compteur_de_dinotrains >= 0)
     {
-      train_counter++;
+      compteur_de_dinotrains++;
       return true;
     }
     return false;
@@ -27,9 +27,9 @@ public:
 
   bool controlinEnA(int numero)
   {
-    if (train_counter <= 0)
+    if (compteur_de_dinotrains <= 0)
     {
-      train_counter--;
+      compteur_de_dinotrains--;
       return true;
     }
     return false;
@@ -37,24 +37,24 @@ public:
 
   bool controloutEnB(int numero)
   {
-    train_counter++;
+    compteur_de_dinotrains++;
     return true;
   }
 
   bool controloutEnA(int numero)
   {
-    train_counter--;
+    compteur_de_dinotrains--;
     return true;
   }
 
 private:
   /**
-   * @brief Compteur de trains
+   * @brief Compteur de dinotrains
    * @details Négatif = trains circulant de A à B
    *          Positif = trains circulant de B à A
    *          0 = Aucun train ne circule
    */
-  int train_counter;
+  int compteur_de_dinotrains;
 };
 
 #endif // CONTROLEUR_HPP
